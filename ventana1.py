@@ -6,14 +6,14 @@ import sys
 class Ventana1(QMainWindow):
 
     # Hacer el método de construcción de la ventana:
-    def __int__(self, parent=None):
+    def __init__(self, parent=None):
         super(Ventana1, self).__init__(parent)
 
         # Poner el titúlo
         self.setWindowTitle("Formulario de registro")
 
         # Poner el icono
-        self.setWindowIcon(QtGui.QIcon('imagenes/imagen 1'))
+        self.setWindowIcon(QtGui.QIcon('imagenes/imagen1.png'))
 
         # Estableciendo las propiedades de ancho y alto:
         self.ancho = 900
@@ -52,8 +52,9 @@ class Ventana1(QMainWindow):
 
         # Establecemos la distribución de los elementos en layout horizontal:
         self.horizontal = QHBoxLayout()
+
         # Le ponemos las margenes
-        self.horizontal.setContentsMargins(30,30,30,30)
+        self.horizontal.setContentsMargins(30, 30, 30, 30)
 
         # --------- LAYOUT IZQUIERDO ---------
 
@@ -67,15 +68,15 @@ class Ventana1(QMainWindow):
         self.letrero1.setText('Información del Cliente')
 
         # Le asignamos el tipo de letra:
-        self.letrero1.setFont(QFont("Andale Mono",20))
+        self.letrero1.setFont(QFont("Andale Mono", 20))
 
-        # Le ponemos el color de texto y marqenes:
-        self.letrero1.setStyleSheet("color: #00080;")
+        # Le ponemos el color de texto:
+        self.letrero1.setStyleSheet("color: #FF3396;")
 
         # Agregamos el letrero en la primera fila:
         self.ladoIzquierdo.addRow(self.letrero1)
 
-        # Hacemos el letrero:
+        #Hacemos el letrero:
         self.letrero2 = QLabel()
 
         # Establecemos el ancho del label:
@@ -83,17 +84,17 @@ class Ventana1(QMainWindow):
 
         # Le escribimos el texto:
         self.letrero2.setText("Por favor ingrese la información del cliente"
-                             "\nen el formulario de abajo. Los campos marcados"
-                             "\ncon asterisco son obligatorios.")
+                              "\nen el formulario de abajo. Los campos marcados"
+                              "\ncon asterisco son obligatorios.")
 
         # Le asignamos el tipo de letra:
-        self.letrero2.setFont(QFont("Andale Mono", 10))
+        self.letrero2.setFont(QFont("An dale Mono", 10))
 
-        # Le ponemos color de texto y margenes:
-        self.letrero2.setStylesheet("clor: #00080; margin-bottom: 40px"
+         # Le ponemos color de texto y margenes:
+        self.letrero2.setStyleSheet("color: #FF3396; margin-bottom: 40px;"
                                     "margin-top: 20px;"
                                     "padding-bottom: 10px;"
-                                    "border: 2px solid #000080;"
+                                    "border: 2px solid #FF3396;"
                                     "border-left: none;"
                                     "border-right: none;"
                                     "border-top: none;")
@@ -106,7 +107,7 @@ class Ventana1(QMainWindow):
         self.nombreCompleto.setFixedWidth(250)
 
         # Agregamos estos en los formularios:
-        self.ladoIzquierdo.addRow("Nombre Completo*",self.nombreCompleto)
+        self.ladoIzquierdo.addRow("Nombre Completo*", self.nombreCompleto)
 
         # Hacemos el campo para ingresar el usuario:
         self.usuario = QLineEdit()
@@ -116,11 +117,18 @@ class Ventana1(QMainWindow):
         self.ladoIzquierdo.addRow("Usuario*", self.usuario)
 
         # Hacemos el campo para ingresar el password:
-        self.pasword = QLineEdit()
+        self.password = QLineEdit()
         self.password.setFixedWidth(250)
-        self.password.setEchoMode(QLineEdit.password)
 
-        # AQgregamos estos en el formulario:
+
+        # Agregamos estos en el formulario:
+        self.ladoIzquierdo.addRow("password*", self.password)
+
+        # Hacemos el campo para ingresar el password:
+        self.password2 = QLineEdit()
+        self.password2.setFixedWidth(250)
+
+        # Agregamos estos en el formulario:
         self.ladoIzquierdo.addRow("password*", self.password2)
 
         # Hacemos el campo para ingresar el documento:
@@ -130,7 +138,7 @@ class Ventana1(QMainWindow):
         # Agregamos el documento en el formulario:
         self.ladoIzquierdo.addRow("Documento*", self.documento)
 
-        # Hcaemos el campo para ingresar el correo:
+        # Hacemos el campo para ingresar el correo:
         self.correo = QLineEdit()
         self.correo.setFixedWidth(250)
 
@@ -155,33 +163,38 @@ class Ventana1(QMainWindow):
         self.botonLimpiar = QPushButton("Limpiar")
 
         # Establecemos el ancho del botón:
-        self.botonLimpiar.setFixeWidth(90)
+        self.botonLimpiar.setFixedWidth(90)
 
-        #Le ponemos los estilos:
-        self.botonLimpiar.setStylesheet("background-color: #008B45;"
+        # Le ponemos los estilos:
+        self.botonLimpiar.setStyleSheet("background-color: #008B45;"
                                         "color: #FFFFFF;"
                                         "padding: 10px;"
-                                        "margin-top: 48px;"
+                                        "margin-top: 40px;"
                                         )
-        # Agregamos los botones al layout ladoDerecho:
-        self.ladoDerecho.addRow(self.botonBuscar,self.botonRecuperar)
-        # ---
+        self.botonLimpiar.clicked.connect(self.accion_botonLimpiar)
 
-        # Agregamos el Layout ladoDerecho al layout horizontal:
-        self.horizontal.addLayout(self.ladoDerecho)
+        # Agregamos los dos botones al layout ladoIzquierdo:
+        self.ladoIzquierdo.addRow(self.botonRegistrar, self.botonLimpiar)
+
+        # Agregamos el layout ladoIzquierdo al layout horizontal:
+        self.horizontal.addLayout(self.ladoIzquierdo)
+
+        # --------------- Lado Derecho ----------------
+
 
         # --------------- OJO IMPORTANTE PONER AL FINAL ----------------
 
-        #Indicamos que el layout principal del fondo es horizontal:
+        # Indicamos que el layout principal del fondo es horizontal:
         self.fondo.setLayout(self.horizontal)
 
     # Metodo del botónLimpiar:
     def accion_botonLimpiar(self):
-
+        pass
+        '''
         self.nombreCompleto.setText('')
         self.usuario.setText('')
-        self.pasword.setText('')
-        self.pasword2.setText('')
+        self.password.setText('')
+        self.password2.setText('')
         self.documento.setText('')
         self.correo.setText('')
         self.pregunta1.setText('')
@@ -190,11 +203,16 @@ class Ventana1(QMainWindow):
         self.respuesta2.setText('')
         self.pregunta3.setText('')
         self.respuesta3.setText('')
+        :return: 
+        '''
 
+        # --------------- OJO IMPORTANTE PONER AL FINAL ----------------
 
-class QAPPlication:
-    pass
+    def accion_botonRegistrar(self):
+        pass
 
+    def accion_botonRecuperar(self):
+        pass
 
 if __name__ == '__main__':
 
@@ -205,3 +223,5 @@ if __name__ == '__main__':
     ventana1.show()
 
     sys.exit(app.exec_())
+
+
